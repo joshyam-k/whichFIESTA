@@ -41,7 +41,14 @@ files_and_contents <- R_folder_meta %>%
        .y = R_folder_meta$f_sha,
        .f =  ~ get_file_contents(.x, .y))
 
+
 files_and_contents[[1]]
+
+
+# next step is to use regex to extract function names from those file contents
+# endgoal is to have a function that takes a string and sees if it exists as a function definition in one of the files
+
+
 
 
 
