@@ -1,0 +1,11 @@
+---
+output: github_document
+---
+
+### Usage
+
+```{r message=F, warning=F}
+library(whichFIESTA)
+whichFIESTA("pcheck.varchar")
+```
+
