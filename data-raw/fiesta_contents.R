@@ -1,7 +1,7 @@
-#' @importFrom gh gh
-#' @importFrom purrr map_dfr map2
-#' @importFrom openssl base64_decode
-#' @importFrom stringr str_extract_all str_trim
+library(gh)
+library(openssl)
+library(purrr)
+library(stringr)
 
 
 R_tree_FIESTAutils <- gh("GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
