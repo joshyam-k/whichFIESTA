@@ -9,6 +9,7 @@
 whichFIESTA <- function(func_name) {
 
   # full_funcs_df is internal
+  # you can see how it is created in data-raw/fiesta_contents.R
   out <- full_funcs_df[full_funcs_df[["function_name"]] == func_name, , drop = FALSE]
 
 
