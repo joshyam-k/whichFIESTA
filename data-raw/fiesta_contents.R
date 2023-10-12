@@ -2,6 +2,7 @@ library(gh)
 library(openssl)
 library(purrr)
 library(stringr)
+library(usethis)
 library(dplyr)
 
 

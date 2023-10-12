@@ -16,7 +16,8 @@ Imports: purrr,
     gh,
     openssl,
     here,
-    dplyr
+    dplyr,
+    usethis
 Depends: 
     R (>= 4.1.0)
 LazyData: true
