@@ -1,10 +1,15 @@
+#' Locate a given FIESTA or FIESTAutils function
+#'
+#' @param func_name A string representing the function name you wish to locate
+#' @examples
+#' whichFIESTA("pcheck.varchar")
 #' @importFrom here here
 #' @importFrom stringr str_extract
 #' @export
 whichFIESTA <- function(func_name) {
 
   # full_funcs_df is internal
-  out <- full_funcs_df[full_funcs_df[["function_name"]] == func_name, ]
+  out <- full_funcs_df[full_funcs_df[["function_name"]] == func_name, , drop = FALSE]
 
 
   if (length(out) == 0) {
