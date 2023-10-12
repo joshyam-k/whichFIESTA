@@ -2,6 +2,7 @@ library(gh)
 library(openssl)
 library(purrr)
 library(stringr)
+library(dplyr)
 
 
 R_tree_FIESTAutils <- gh("GET /repos/{owner}/{repo}/git/trees/{tree_sha}",

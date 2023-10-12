@@ -15,7 +15,8 @@ Imports: purrr,
     stringr,
     gh,
     openssl,
-    here
+    here,
+    dplyr
 Depends: 
     R (>= 4.1.0)
 LazyData: true
