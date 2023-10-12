@@ -7,7 +7,7 @@ output: github_document
 Install using:
 
 ```{r warning=F, message=F}
-devtools::install_github("joshyam-k/whichFIESTA")
+# devtools::install_github("joshyam-k/whichFIESTA")
 library(whichFIESTA)
 ```
 
