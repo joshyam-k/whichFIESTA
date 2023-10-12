@@ -4,7 +4,5 @@
 ``` r
 library(whichFIESTA)
 
-whichFIESTA("pcheck.logical")
+whichFIESTA("pcheck.varchar")
 ```
-
-    ## [1] "pcheck.logical exists in  at "

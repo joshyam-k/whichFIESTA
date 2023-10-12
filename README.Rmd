@@ -7,6 +7,6 @@ output: github_document
 ```{r message=F, warning=F}
 library(whichFIESTA)
 
-whichFIESTA("pcheck.logical")
+whichFIESTA("pcheck.varchar")
 ```
 

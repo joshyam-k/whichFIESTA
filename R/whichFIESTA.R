@@ -14,7 +14,7 @@ whichFIESTA <- function(func_name) {
     pkg <- str_extract(out$location, "(.*)(?=/R/)")
     path <- str_extract(out$location, paste0("(?<=", pkg, "/", ")", ".*"))
     out_text <- paste0(func_name, " exists in ", pkg, " at ", path)
-    out_text
+    message(out_text)
   }
 
 }

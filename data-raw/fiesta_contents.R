@@ -54,7 +54,7 @@ get_function_names <- function(contents) {
 
   func_names <- str_extract_all(
     contents[[1]],
-    "((?<=\n).*)(?=\\s?<-\\s?function\\()"
+    "((?<=\n).*)(?=\\s?<-\\s?function\\s?\\()"
   )
 
   out <- str_trim(func_names[[1]], side = "both")
