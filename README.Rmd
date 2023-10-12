@@ -4,7 +4,7 @@ output: github_document
 
 ### Usage
 
-```{r message=F, warning=F}
+```{r warning=F}
 library(whichFIESTA)
 
 whichFIESTA("pcheck.varchar")
