@@ -1,28 +1,27 @@
-library(gh)
-library(purrr)
-library(stringr)
-library(curl)
-library(openssl)
-library(here)
+#' @importFrom gh gh
+#' @importFrom purrr map_dfr map2
+#' @importFrom openssl base64_decode
+#' @importFrom stringr str_extract_all str_trim
+
 
 R_tree_FIESTAutils <- gh("GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
-             owner = "USDAForestService",
-             repo = "FIESTAutils",
-             tree_sha = "ba5a35986510d6970f718e8987f691b07f72359e")
+                         owner = "USDAForestService",
+                         repo = "FIESTAutils",
+                         tree_sha = "ba5a35986510d6970f718e8987f691b07f72359e")
 
 R_tree_FIESTA <- gh("GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
-                         owner = "USDAForestService",
-                         repo = "FIESTA",
-                         tree_sha = "913fad50f716ef7d49d1d3534a3ff96c19ca4838")
+                    owner = "USDAForestService",
+                    repo = "FIESTA",
+                    tree_sha = "913fad50f716ef7d49d1d3534a3ff96c19ca4838")
 
 name_and_sha <- function(tree) {
   data.frame(f_name = tree$path, f_sha = tree$sha)
 }
 
-R_folder_FIESTAutils <- R_tree_FIESTAutils$tree %>%
+R_folder_FIESTAutils <- R_tree_FIESTAutils$tree |>
   map_dfr(name_and_sha)
 
-R_folder_FIESTA <- R_tree_FIESTA$tree %>%
+R_folder_FIESTA <- R_tree_FIESTA$tree |>
   map_dfr(name_and_sha)
 
 get_file_contents <- function(f_name, f_sha, repo) {
@@ -41,12 +40,12 @@ get_file_contents <- function(f_name, f_sha, repo) {
 
 }
 
-FIESTAutils_cont <- R_folder_FIESTAutils %>%
+FIESTAutils_cont <- R_folder_FIESTAutils |>
   map2(.x = R_folder_FIESTAutils$f_name,
        .y = R_folder_FIESTAutils$f_sha,
        .f =  ~ get_file_contents(.x, .y, repo = "FIESTAutils"))
 
-FIESTA_cont <- R_folder_FIESTA %>%
+FIESTA_cont <- R_folder_FIESTA |>
   map2(.x = R_folder_FIESTA$f_name,
        .y = R_folder_FIESTA$f_sha,
        .f =  ~ get_file_contents(.x, .y, repo = "FIESTA"))
@@ -81,15 +80,13 @@ full_extract <- function(x, package) {
 
 FIESTAutils_df <-
   map_dfr(.x = FIESTAutils_cont,
-       .f = ~ full_extract(.x, package = "FIESTAutils"))
+          .f = ~ full_extract(.x, package = "FIESTAutils"))
 
 FIESTA_df <-
   map_dfr(.x = FIESTA_cont,
           .f = ~ full_extract(.x, package = "FIESTA"))
 
+full_funcs_df <- rbind(FIESTA_df, FIESTAutils_df)
 
 
-
-
-saveRDS(FIESTAutils_df, file = here("data/FIESTAutils_contents.csv"))
-saveRDS(FIESTA_df, file = here("data/FIESTA_contents.csv"))
+usethis::use_data(full_funcs_df, overwrite = TRUE, internal = TRUE)

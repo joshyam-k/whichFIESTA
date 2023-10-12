@@ -1,13 +1,9 @@
-
-
+#' @importFrom here here
+#' @export
 whichFIESTA <- function(func_name) {
 
-  FIESTAutils_contents <- readRDS(here("data/FIESTAutils_contents.csv"))
-  FIESTA_contents <- readRDS(here("data/FIESTA_contents.csv"))
 
-  full <- rbind(FIESTAtils_contents, FIESTA_contents)
-
-  out <- full[full[["funcs"]] == func_name, ]
+  out <- full_funcs_df[full_funcs_df[["function_name"]] == func_name, ]
 
 
   if (length(out) == 0) {
@@ -20,7 +16,6 @@ whichFIESTA <- function(func_name) {
 }
 
 
-whichFIESTA("pcheck.varchar")
 
 
 
