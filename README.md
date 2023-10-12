@@ -3,8 +3,8 @@
 
 ``` r
 library(whichFIESTA)
-whichFIESTA("pcheck.varchar")
+
+whichFIESTA("pcheck.logical")
 ```
 
-    ##                             location  function_name
-    ## 180 FIESTAutils/R/pcheck.functions.R pcheck.varchar
+    ## [1] "pcheck.logical exists in  at "
