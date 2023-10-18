@@ -88,7 +88,8 @@ FIESTA_df <-
   map_dfr(.x = FIESTA_cont,
           .f = ~ full_extract(.x, package = "FIESTA"))
 
-full_funcs_df <- rbind(FIESTA_df, FIESTAutils_df)
+full_funcs_df <- rbind(FIESTA_df, FIESTAutils_df) |>
+  filter(!str_detect(function_name, "#"))
 
 
 usethis::use_data(full_funcs_df, overwrite = TRUE, internal = TRUE)

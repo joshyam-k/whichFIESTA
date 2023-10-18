@@ -11,7 +11,7 @@ whichFIESTA <- function(func_name) {
   # full_funcs_df is internal
   # you can see how it is created in data-raw/fiesta_contents.R
   out <- full_funcs_df[full_funcs_df[["function_name"]] == func_name, , drop = FALSE]
-
+  out <- unique(out)
 
   if (nrow(out) == 0) {
     stop(paste0("Could not find function ", "'", func_name, "'", " in either FIESTA or FIESTAutils"))
