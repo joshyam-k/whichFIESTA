@@ -14,8 +14,7 @@ whichFIESTA <- function(func_name) {
 
 
   if (nrow(out) == 0) {
-    message(paste0("Could not find ", func_name, "in either FIESTA or FIESTAutils"))
-    return(NULL)
+    stop(paste0("Could not find function ", "'", func_name, "'", " in either FIESTA or FIESTAutils"))
   } else {
     pkg <- str_extract(out$location, "(.*)(?=/R/)")
     path <- str_extract(out$location, paste0("(?<=", pkg, "/", ")", ".*"))
