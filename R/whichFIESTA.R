@@ -16,13 +16,39 @@ whichFIESTA <- function(func_name) {
   if (nrow(out) == 0) {
     stop(paste0("Could not find function ", "'", func_name, "'", " in either FIESTA or FIESTAutils"))
   } else {
-    pkg <- str_extract(out$location, "(.*)(?=/R/)")
-    path <- str_extract(out$location, paste0("(?<=", pkg, "/", ")", ".*"))
-    out_text <- paste0(func_name, " exists in ", pkg, " at ", path)
-    message(out_text)
+    for(i in 1:nrow(out)) {
+      messaging(out[i, , drop = FALSE], func_name)
+      if (i != nrow(out)) {
+        cat("\n")
+      }
+    }
   }
 
 }
+
+messaging <- function(out, func_name) {
+  expo <- ifelse(out$exported, "::", ":::")
+  pkg <- str_extract(out$location, "(.*)(?=/R/)")
+  path <- str_extract(out$location, paste0("(?<=", pkg, "/", ")", ".*"))
+  location <- paste0(func_name, " exists in ", pkg, " at ", path)
+  access <- paste0("Access using ", pkg, expo, func_name)
+  message(location)
+  message(access)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

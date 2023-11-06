@@ -4,6 +4,9 @@ library(purrr)
 library(stringr)
 library(usethis)
 library(dplyr)
+library(tidyr)
+library(FIESTA)
+library(FIESTAutils)
 
 
 R_tree_FIESTAutils <- gh("GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
@@ -90,6 +93,17 @@ FIESTA_df <-
 
 full_funcs_df <- rbind(FIESTA_df, FIESTAutils_df) |>
   filter(!str_detect(function_name, "#"))
+
+
+export_info <- data.frame(
+  function_name = unique(c(ls("package:FIESTA"), ls("package:FIESTAutils"))),
+  exported = TRUE
+)
+
+
+full_funcs_df <- full_funcs_df |>
+  left_join(export_info, by = "function_name") |>
+  mutate(exported = replace_na(exported, FALSE))
 
 
 usethis::use_data(full_funcs_df, overwrite = TRUE, internal = TRUE)
