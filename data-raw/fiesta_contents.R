@@ -8,25 +8,25 @@ library(tidyr)
 library(FIESTA)
 library(FIESTAutils)
 
-
-R_tree_FIESTAutils <- gh("GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
+R_tree_FIESTAutils <- gh("GET /repos/{owner}/{repo}/contents/{path}",
                          owner = "USDAForestService",
                          repo = "FIESTAutils",
-                         tree_sha = "ba5a35986510d6970f718e8987f691b07f72359e")
+                         path = "R/")
 
-R_tree_FIESTA <- gh("GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
+R_tree_FIESTA <- gh("GET /repos/{owner}/{repo}/contents/{path}",
                     owner = "USDAForestService",
                     repo = "FIESTA",
-                    tree_sha = "913fad50f716ef7d49d1d3534a3ff96c19ca4838")
+                    path = "R/")
+
 
 name_and_sha <- function(tree) {
   data.frame(f_name = tree$path, f_sha = tree$sha)
 }
 
-R_folder_FIESTAutils <- R_tree_FIESTAutils$tree |>
+R_folder_FIESTAutils <- R_tree_FIESTAutils |>
   map_dfr(name_and_sha)
 
-R_folder_FIESTA <- R_tree_FIESTA$tree |>
+R_folder_FIESTA <- R_tree_FIESTA |>
   map_dfr(name_and_sha)
 
 get_file_contents <- function(f_name, f_sha, repo) {
@@ -75,7 +75,7 @@ full_extract <- function(x, package) {
   num_funcs <- length(funcs)
 
   out <- data.frame(
-    location = rep(paste0(package, "/R/", file), num_funcs),
+    location = rep(paste0(package, "/", file), num_funcs),
     function_name = funcs
   )
 
@@ -91,6 +91,7 @@ FIESTA_df <-
   map_dfr(.x = FIESTA_cont,
           .f = ~ full_extract(.x, package = "FIESTA"))
 
+# remove commented out functions
 full_funcs_df <- rbind(FIESTA_df, FIESTAutils_df) |>
   filter(!str_detect(function_name, "#"))
 
