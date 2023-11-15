@@ -3,13 +3,13 @@
 #' @param func_name A string representing the function name you wish to locate
 #' @examples
 #' whichFIESTA("pcheck.varchar")
-#' @importFrom here here
 #' @importFrom stringr str_extract
 #' @export
 whichFIESTA <- function(func_name) {
 
   # full_funcs_df is internal
   # you can see how it is created in data-raw/fiesta_contents.R
+  # or access it using whichFIESTA:::full_funcs_df
   out <- full_funcs_df[full_funcs_df[["function_name"]] == func_name, , drop = FALSE]
   out <- unique(out)
 
