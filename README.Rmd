@@ -13,8 +13,7 @@ library(whichFIESTA)
 
 Run using:
 
-``` {r}
+``` {r, eval = FALSE}
 whichFIESTA("pcheck.varchar")
-whichFIESTA("check.rowcol")
 ```
 
