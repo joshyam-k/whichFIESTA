@@ -8,6 +8,6 @@ Install using:
 library(whichFIESTA)
 ```
 
-## Usage
+### Usage
 
 ![](https://github.com/joshyam-k/whichFIESTA/blob/main/gif/whichFIESTA-demo.gif?raw=true)
