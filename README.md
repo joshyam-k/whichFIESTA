@@ -1,5 +1,5 @@
 
-### Usage
+### Installation
 
 Install using:
 
@@ -8,8 +8,6 @@ Install using:
 library(whichFIESTA)
 ```
 
-Run using:
+## Usage
 
-``` r
-whichFIESTA("pcheck.varchar")
-```
+![](https://github.com/joshyam-k/whichFIESTA/blob/main/gif/whichFIESTA-demo.gif?raw=true)
