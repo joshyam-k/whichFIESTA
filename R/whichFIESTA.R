@@ -37,7 +37,8 @@ messaging <- function(out, func_name) {
   expo <- ifelse(out$exported, "::", ":::")
   pkg <- str_extract(out$location, "(.*)(?=/R/)")
   path <- str_extract(out$location, paste0("(?<=", pkg, "/", ")", ".*"))
-  url <- paste0("https://github.com/USDAForestService/", pkg, "/blob/master/", path)
+  branch <- ifelse(pkg == "FIESTA", "master", "main")
+  url <- paste0("https://github.com/USDAForestService/", pkg, "/blob/", branch, "/", path)
   clickable <- cli::style_hyperlink(
     text = path,
     url = url
